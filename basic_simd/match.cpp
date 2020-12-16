@@ -33,7 +33,6 @@ unsigned match_block(const int *x, const int *y)
     {
         cout << " " <<i[j] ;
     }
-
     return _mm_movemask_epi8(swap); //Returns a mask of the most significant bit of each element in a.;Compares packed 8-bit integers in a and b for equality.
 }
 
