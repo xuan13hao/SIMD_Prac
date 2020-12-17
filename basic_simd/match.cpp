@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <immintrin.h>
+#include "data.h"
 using std::cout;
 
 unsigned popcount_3(uint64_t x)
