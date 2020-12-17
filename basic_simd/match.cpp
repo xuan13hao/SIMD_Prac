@@ -3,6 +3,7 @@
 #include <immintrin.h>
 #include "data.h"
 using std::cout;
+using std::endl;
 
 unsigned popcount_3(uint64_t x)
 {
@@ -28,7 +29,7 @@ unsigned match_block(const int *x, const int *y)
 	__m128i r1 = _mm_loadu_si128 ((__m128i const*)(x));//Loads 128-bits of integer data from memory into a new vector
 	__m128i r2 = _mm_loadu_si128 ((__m128i const*)(y));
 	r2 = _mm_and_si128(r2, mask);					  //Computes the bitwise AND of 128 bits (representing integer data) in a and b.
-    __m128i swap = _mm_cmpeq_epi8(r1, r2);
+    __m128i swap = _mm_cmpeq_epi32(r1, r2);
     int *i = (int *)&swap;
     for (size_t j = 0; j < 4; j++)
     {
@@ -40,11 +41,14 @@ unsigned match_block(const int *x, const int *y)
 int main()
 {
     int a[] = {1, 2, 3, 4};
-    int b[] = {1,3,3,5};
+    int b[] = {1, 3, 3, 5};
     int i = match_block(a,b);
 
-    //int j = popcount_3(i);
+    int j = popcount_3(i);
+    //cout << "" <<j<<endl;
 
-    cout << " " <<i ;
+    //cout << " " <<i ;
+
+    cout << ", j =" <<j<<endl;
     return 1;
 }
