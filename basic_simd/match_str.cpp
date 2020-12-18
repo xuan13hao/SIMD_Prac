@@ -30,8 +30,9 @@ unsigned match_block(const char *x, const char *y)
 	__m128i r2 = _mm_loadu_si128 ((__m128i const*)(y));
 	r2 = _mm_and_si128(r2, mask);					  //Computes the bitwise AND of 128 bits (representing integer data) in a and b.
     __m128i swap = _mm_cmpeq_epi8(r1, r2);
-    int *i = (int *)&swap;
-    for (size_t j = 0; j < 4; j++)
+    //printf("swap  = %4vhhu\n", swap);
+    int8_t *i = (int8_t *)&swap;
+    for (size_t j = 0; j < 16; j++)
     {
         cout << " " <<i[j] ;
     }
@@ -41,11 +42,15 @@ unsigned match_block(const char *x, const char *y)
 int main()
 {
 
-    int i = match_block(s1,s2);
-    int j = popcount_3(i);
+    int i1 = match_block(s29,s30);
+    int j1 = popcount_3(i1);
+
+    int i2 = match_block(s1,s2);
+    int j2 = popcount_3(i2);
     //cout << "" <<j<<endl;
     //cout << " " <<i ;
 
-    cout << ", j =" <<j<<endl;
+    cout << ", j1 =" <<j1<<endl;
+    cout << ", j2 =" <<j2<<endl;
     return 1;
 }
